@@ -3,29 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $data = [
-            [
-                "id" => 1,
-                "name" => "Product 1",
-                "price" => 10000
-            ],
-            [
-                "id" => 2,
-                "name" => "Product 2",
-                "price" => 20000
-            ],
-        ];
-
+        // READ
+        $products = Product::with('category')->get();
 
         return response()->json([
             "status" => "success",
             "message" => "Data product berhasil diambil",
-            "data" => $data
+            "data" => $products
         ]);
     }
 
